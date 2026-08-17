@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0d12">
+
+<title>Utility — All Your Tools</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #080a0f;
+    --panel: rgba(255,255,255,.055);
+    --panel-hover: rgba(255,255,255,.085);
+    --border: rgba(255,255,255,.1);
+    --text: #f5f7fa;
+    --muted: #8b919d;
+    --accent: #8b7cff;
+    --accent2: #6c63ff;
+    --danger: #ff6262;
+    --radius: 22px;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(108,99,255,.13), transparent 30%),
+        radial-gradient(circle at 85% 75%, rgba(0,200,255,.08), transparent 30%),
+        var(--bg);
+    color: var(--text);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+.app {
+    width: min(1400px, 94%);
+    margin: auto;
+    padding: 28px 0 50px;
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+    background: linear-gradient(135deg, var(--accent), #4e9cff);
+    box-shadow: 0 10px 35px rgba(108,99,255,.3);
+}
+
+.logo h1 {
+    font-size: 21px;
+    letter-spacing: -.5px;
+}
+
+.logo span {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.clock {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* NAV */
+
+.nav {
+    display: flex;
+    gap: 8px;
+    padding: 7px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.035);
+    backdrop-filter: blur(20px);
+    border-radius: 17px;
+    overflow-x: auto;
+}
+
+.nav button {
+    white-space: nowrap;
+    color: var(--muted);
+    background: transparent;
+    padding: 10px 17px;
+    border-radius: 12px;
+    transition: .2s;
+}
+
+.nav button:hover {
+    background: var(--panel-hover);
+    color: white;
+}
+
+.nav button.active {
+    color: white;
+    background: rgba(139,124,255,.18);
+    box-shadow: inset 0 0 0 1px rgba(139,124,255,.2);
+}
+
+/* PAGES */
+
+.page {
+    display: none;
+    animation: appear .25s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CARDS */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 18px;
+}
+
+.card {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    backdrop-filter: blur(22px);
+    border-radius: var(--radius);
+    padding: 22px;
+}
+
+.card h2 {
+    font-size: 17px;
+    margin-bottom: 6px;
+}
+
+.card-description {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 18px;
+}
+
+.span-4 {
+    grid-column: span 4;
+}
+
+.span-6 {
+    grid-column: span 6;
+}
+
+.span-8 {
+    grid-column: span 8;
+}
+
+.span-12 {
+    grid-column: span 12;
+}
+
+/* CALCULATOR */
+
+.calculator {
+    max-width: 420px;
+    margin: auto;
+}
+
+.calc-display {
+    background: rgba(0,0,0,.25);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 12px;
+    text-align: right;
+    min-height: 100px;
+}
+
+.calc-expression {
+    color: var(--muted);
+    font-size: 13px;
+    min-height: 20px;
+}
+
+.calc-value {
+    font-size: 34px;
+    font-weight: 600;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.calc-buttons button {
+    height: 62px;
+    border-radius: 15px;
+    color: white;
+    background: rgba(255,255,255,.065);
+    border: 1px solid rgba(255,255,255,.06);
+    transition: .15s;
+    font-size: 17px;
+}
+
+.calc-buttons button:hover {
+    background: rgba(255,255,255,.12);
+    transform: translateY(-1px);
+}
+
+.calc-buttons button:active {
+    transform: scale(.96);
+}
+
+.calc-buttons .operator {
+    color: #b9b0ff;
+    background: rgba(139,124,255,.1);
+}
+
+.calc-buttons .equals {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+}
+
+.calc-buttons .danger {
+    color: #ff8585;
+}
+
+/* INPUTS */
+
+.input,
+select,
+textarea {
+    width: 100%;
+    color: white;
+    background: rgba(0,0,0,.2);
+    border: 1px solid var(--border);
+    outline: none;
+    border-radius: 13px;
+    padding: 13px;
+}
+
+.input:focus,
+select:focus,
+textarea:focus {
+    border-color: rgba(139,124,255,.6);
+}
+
+select {
+    appearance: auto;
+}
+
+select option {
+    background: #17191f;
+}
+
+label {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.field {
+    margin-bottom: 14px;
+}
+
+/* BUTTONS */
+
+.btn {
+    padding: 12px 17px;
+    border-radius: 13px;
+    color: white;
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    transition: .2s;
+}
+
+.btn:hover {
+    background: rgba(255,255,255,.13);
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+}
+
+.btn.danger {
+    background: rgba(255,80,80,.12);
+    color: #ff8585;
+}
+
+.button-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* CONVERTER */
+
+.convert-result {
+    margin-top: 17px;
+    padding: 18px;
+    text-align: center;
+    border-radius: 15px;
+    background: rgba(139,124,255,.08);
+    border: 1px solid rgba(139,124,255,.15);
+}
+
+.convert-result strong {
+    display: block;
+    font-size: 26px;
+    margin-bottom: 4px;
+}
+
+.convert-result span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* STOPWATCH */
+
+.stopwatch {
+    text-align: center;
+}
+
+.time-big {
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(45px, 7vw, 72px);
+    letter-spacing: -3px;
+    font-weight: 600;
+    margin: 25px 0;
+}
+
+.laps {
+    max-height: 180px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+.lap {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 4px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* TIMER */
+
+.timer-circle {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    margin: 25px auto;
+    display: grid;
+    place-items: center;
+    position: relative;
+    background: conic-gradient(
+        var(--accent) var(--progress, 0%),
+        rgba(255,255,255,.07) var(--progress, 0%)
+    );
+}
+
+.timer-circle::before {
+    content: "";
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    background: #0d1017;
+    border: 1px solid var(--border);
+}
+
+.timer-circle .time-big {
+    position: relative;
+    z-index: 1;
+    font-size: 42px;
+    margin: 0;
+}
+
+.timer-settings {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 9px;
+}
+
+/* NOTES */
+
+.notes {
+    height: 430px;
+    resize: none;
+    line-height: 1.6;
+}
+
+.note-status {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+/* HOME */
+
+.hero {
+    padding: 30px;
+    margin-bottom: 18px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background:
+        radial-gradient(circle at 90% 20%, rgba(139,124,255,.18), transparent 30%),
+        var(--panel);
+}
+
+.hero h2 {
+    font-size: clamp(28px, 5vw, 48px);
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.quick-tools {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.tool-tile {
+    padding: 18px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.04);
+    border-radius: 18px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.tool-tile:hover {
+    background: rgba(255,255,255,.08);
+    transform: translateY(-3px);
+}
+
+.tool-icon {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.tool-tile strong {
+    display: block;
+    font-size: 14px;
+}
+
+.tool-tile span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* CLIPBOARD */
+
+.clip-output {
+    min-height: 100px;
+    margin-top: 12px;
+    padding: 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    border-radius: 13px;
+    background: rgba(0,0,0,.2);
+    color: var(--muted);
+}
+
+/* TOAST */
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    opacity: 0;
+    padding: 12px 18px;
+    background: #191c25;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    box-shadow: 0 15px 50px rgba(0,0,0,.4);
+    transition: .3s;
+    z-index: 100;
+    font-size: 13px;
+}
+
+.toast.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 900px) {
+    .span-4,
+    .span-6,
+    .span-8 {
+        grid-column: span 12;
+    }
+
+    .quick-tools {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width: 550px) {
+    .app {
+        width: 92%;
+        padding-top: 18px;
+    }
+
+    header {
+        margin-bottom: 18px;
+    }
+
+    .clock {
+        display: none;
+    }
+
+    .card {
+        padding: 17px;
+    }
+
+    .timer-settings {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-tools {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">⌘</div>
+        <div>
+            <h1>Utility</h1>
+            <span>Small tools. One place.</span>
+        </div>
+    </div>
+
+    <div class="clock" id="clock">--:--:--</div>
+</header>
+
+<nav class="nav">
+    <button class="active" onclick="showPage('home', this)">Home</button>
+    <button onclick="showPage('calculator', this)">Calculator</button>
+    <button onclick="showPage('converter', this)">Converter</button>
+    <button onclick="showPage('stopwatch', this)">Stopwatch</button>
+    <button onclick="showPage('timer', this)">Timer</button>
+    <button onclick="showPage('notes', this)">Notes</button>
+    <button onclick="showPage('clipboard', this)">Text Tools</button>
+</nav>
+
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+    <div class="hero">
+        <h2>Your digital toolbox.</h2>
+        <p>
+            A collection of useful everyday utilities packed into one
+            lightweight browser app. Everything runs locally.
+        </p>
+
+        <div class="quick-tools">
+
+            <div class="tool-tile" onclick="go('calculator')">
+                <div class="tool-icon">🧮</div>
+                <strong>Calculator</strong>
+                <span>Quick calculations</span>
+            </div>
+
+            <div class="tool-tile" onclick="go('converter')">
+                <div class="tool-icon">↔</div>
+                <strong>Converter</strong>
+                <span>Units & measurements</span>
+            </div>
+
+            <div class="tool-tile" onclick="go('stopwatch')">
+                <div class="tool-icon">⏱</div>
+                <strong>Stopwatch</strong>
+                <span>Track elapsed time</span>
+            </div>
+
+            <div class="tool-tile" onclick="go('timer')">
+                <div class="tool-icon">◷</div>
+                <strong>Timer</strong>
+                <span>Custom countdowns</span>
+            </div>
+
+            <div class="tool-tile" onclick="go('notes')">
+                <div class="tool-icon">📝</div>
+                <strong>Notes</strong>
+                <span>Autosaved locally</span>
+            </div>
+
+            <div class="tool-tile" onclick="go('clipboard')">
+                <div class="tool-icon">⌘</div>
+                <strong>Text Tools</strong>
+                <span>Transform text</span>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+<!-- CALCULATOR -->
+
+<section id="calculator" class="page">
+
+<div class="card calculator">
+
+    <h2>Calculator</h2>
+    <p class="card-description">Basic arithmetic without leaving the app.</p>
+
+    <div class="calc-display">
+        <div class="calc-expression" id="calcExpression"></div>
+        <div class="calc-value" id="calcDisplay">0</div>
+    </div>
+
+    <div class="calc-buttons">
+
+        <button class="danger" onclick="calcClear()">AC</button>
+        <button onclick="calcDelete()">⌫</button>
+        <button class="operator" onclick="calcInput('%')">%</button>
+        <button class="operator" onclick="calcInput('/')">÷</button>
+
+        <button onclick="calcInput('7')">7</button>
+        <button onclick="calcInput('8')">8</button>
+        <button onclick="calcInput('9')">9</button>
+        <button class="operator" onclick="calcInput('*')">×</button>
+
+        <button onclick="calcInput('4')">4</button>
+        <button onclick="calcInput('5')">5</button>
+        <button onclick="calcInput('6')">6</button>
+        <button class="operator" onclick="calcInput('-')">−</button>
+
+        <button onclick="calcInput('1')">1</button>
+        <button onclick="calcInput('2')">2</button>
+        <button onclick="calcInput('3')">3</button>
+        <button class="operator" onclick="calcInput('+')">+</button>
+
+        <button onclick="calcInput('0')" style="grid-column:span 2">0</button>
+        <button onclick="calcInput('.')">.</button>
+        <button class="equals" onclick="calcEquals()">=</button>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- CONVERTER -->
+
+<section id="converter" class="page">
+
+<div class="grid">
+
+<div class="card span-6">
+
+    <h2>Unit Converter</h2>
+    <p class="card-description">Convert common units instantly.</p>
+
+    <div class="field">
+        <label>Conversion</label>
+        <select id="conversionType" onchange="updateUnits()">
+            <option value="length">Length</option>
+            <option value="weight">Weight</option>
+            <option value="temperature">Temperature</option>
+            <option value="time">Time</option>
+            <option value="data">Data</option>
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Value</label>
+        <input class="input" id="convertInput" type="number" value="1" oninput="convert()">
+    </div>
+
+    <div class="grid" style="gap:8px">
+
+        <div>
+            <label>From</label>
+            <select id="fromUnit" onchange="convert()"></select>
+        </div>
+
+        <div>
+            <label>To</label>
+            <select id="toUnit" onchange="convert()"></select>
+        </div>
+
+    </div>
+
+    <div class="convert-result">
+        <strong id="convertResult">—</strong>
+        <span id="convertExplanation">Enter a value</span>
+    </div>
+
+</div>
+
+<div class="card span-6">
+
+    <h2>Quick Conversions</h2>
+    <p class="card-description">Useful reference values.</p>
+
+    <div style="line-height:2.3;color:var(--muted);font-size:14px">
+        <div>1 kilometre = <b style="color:white">0.621371 miles</b></div>
+        <div>1 metre = <b style="color:white">3.28084 feet</b></div>
+        <div>1 kilogram = <b style="color:white">2.20462 pounds</b></div>
+        <div>1 hour = <b style="color:white">3,600 seconds</b></div>
+        <div>1 byte = <b style="color:white">8 bits</b></div>
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- STOPWATCH -->
+
+<section id="stopwatch" class="page">
+
+<div class="card stopwatch">
+
+    <h2>Stopwatch</h2>
+    <p class="card-description">Precise elapsed-time tracking.</p>
+
+    <div class="time-big" id="stopwatchDisplay">00:00.00</div>
+
+    <div class="button-row" style="justify-content:center">
+        <button class="btn primary" id="stopwatchStart" onclick="toggleStopwatch()">Start</button>
+        <button class="btn" onclick="lapStopwatch()">Lap</button>
+        <button class="btn danger" onclick="resetStopwatch()">Reset</button>
+    </div>
+
+    <div class="laps" id="laps"></div>
+
+</div>
+
+</section>
+
+
+<!-- TIMER -->
+
+<section id="timer" class="page">
+
+<div class="grid">
+
+<div class="card span-8" style="text-align:center">
+
+    <h2>Countdown Timer</h2>
+    <p class="card-description">Create your own custom countdown.</p>
+
+    <div class="timer-circle" id="timerCircle">
+        <div class="time-big" id="timerDisplay">05:00</div>
+    </div>
+
+    <div class="button-row" style="justify-content:center">
+        <button class="btn primary" id="timerButton" onclick="toggleTimer()">Start</button>
+        <button class="btn danger" onclick="resetTimer()">Reset</button>
+    </div>
+
+</div>
+
+<div class="card span-4">
+
+    <h2>Set Timer</h2>
+    <p class="card-description">Hours, minutes and seconds.</p>
+
+    <div class="timer-settings">
+
+        <div class="field">
+            <label>Hours</label>
+            <input class="input" id="timerHours" type="number" min="0" value="0">
+        </div>
+
+        <div class="field">
+            <label>Minutes</label>
+            <input class="input" id="timerMinutes" type="number" min="0" value="5">
+        </div>
+
+        <div class="field">
+            <label>Seconds</label>
+            <input class="input" id="timerSeconds" type="number" min="0" value="0">
+        </div>
+
+    </div>
+
+    <button class="btn primary" style="width:100%;margin-top:5px"
+            onclick="setTimer()">Apply</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NOTES -->
+
+<section id="notes" class="page">
+
+<div class="card">
+
+    <h2>Quick Notes</h2>
+    <p class="card-description">
+        Your note is automatically saved in this browser.
+    </p>
+
+    <textarea
+        id="notesArea"
+        class="notes"
+        placeholder="Start typing..."
+    ></textarea>
+
+    <div class="note-status">
+        <span id="noteStatus">Saved locally</span>
+        <span id="wordCount">0 words</span>
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- TEXT TOOLS -->
+
+<section id="clipboard" class="page">
+
+<div class="grid">
+
+<div class="card span-6">
+
+    <h2>Text Transformer</h2>
+    <p class="card-description">Quickly modify text.</p>
+
+    <textarea
+        id="textInput"
+        class="notes"
+        style="height:250px"
+        placeholder="Paste or type text here..."
+    ></textarea>
+
+    <div class="button-row" style="margin-top:10px">
+        <button class="btn primary" onclick="transformText('upper')">UPPERCASE</button>
+        <button class="btn" onclick="transformText('lower')">lowercase</button>
+        <button class="btn" onclick="transformText('title')">Title Case</button>
+        <button class="btn" onclick="transformText('reverse')">Reverse</button>
+    </div>
+
+</div>
+
+<div class="card span-6">
+
+    <h2>Clipboard</h2>
+    <p class="card-description">Copy or inspect text instantly.</p>
+
+    <div class="button-row">
+        <button class="btn primary" onclick="copyText()">Copy Text</button>
+        <button class="btn" onclick="countText()">Analyze</button>
+        <button class="btn danger" onclick="clearText()">Clear</button>
+    </div>
+
+    <div class="clip-output" id="textStats">
+        Character count and word count will appear here.
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<div class="toast" id="toast">Done</div>
+
+
+<script>
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function showPage(id, button) {
+
+    document.querySelectorAll(".page")
+        .forEach(page => page.classList.remove("active"));
+
+    document.getElementById(id).classList.add("active");
+
+    document.querySelectorAll(".nav button")
+        .forEach(btn => btn.classList.remove("active"));
+
+    if(button) button.classList.add("active");
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function go(id) {
+
+    const buttons = document.querySelectorAll(".nav button");
+
+    buttons.forEach(btn => {
+        btn.classList.toggle(
+            "active",
+            btn.textContent.toLowerCase().includes(id)
+        );
+    });
+
+    showPage(id);
+}
+
+
+/* =========================
+   CLOCK
+========================= */
+
+function updateClock() {
+
+    const now = new Date();
+
+    document.getElementById("clock").textContent =
+        now.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        });
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+
+/* =========================
+   TOAST
+========================= */
+
+let toastTimeout;
+
+function toast(message) {
+
+    const el = document.getElementById("toast");
+
+    el.textContent = message;
+    el.classList.add("show");
+
+    clearTimeout(toastTimeout);
+
+    toastTimeout = setTimeout(() => {
+        el.classList.remove("show");
+    }, 1800);
+}
+
+
+/* =========================
+   CALCULATOR
+========================= */
+
+let calcValue = "";
+
+function calcInput(value) {
+
+    if(calcValue === "Error")
+        calcValue = "";
+
+    calcValue += value;
+
+    document.getElementById("calcDisplay").textContent =
+        calcValue || "0";
+}
+
+function calcClear() {
+
+    calcValue = "";
+
+    document.getElementById("calcDisplay").textContent = "0";
+    document.getElementById("calcExpression").textContent = "";
+}
+
+function calcDelete() {
+
+    calcValue = calcValue.slice(0, -1);
+
+    document.getElementById("calcDisplay").textContent =
+        calcValue || "0";
+}
+
+function calcEquals() {
+
+    if(!calcValue) return;
+
+    try {
+
+        let expression = calcValue.replace(
+            /(\d+(?:\.\d+)?)%/g,
+            "($1/100)"
+        );
+
+        const result = Function(
+            '"use strict"; return (' + expression + ')'
+        )();
+
+        if(!Number.isFinite(result))
+            throw new Error();
+
+        document.getElementById("calcExpression").textContent =
+            calcValue + " =";
+
+        calcValue = String(
+            Math.round(result * 1e12) / 1e12
+        );
+
+        document.getElementById("calcDisplay").textContent =
+            calcValue;
+
+    } catch {
+
+        calcValue = "Error";
+        document.getElementById("calcDisplay").textContent = "Error";
+    }
+}
+
+document.addEventListener("keydown", e => {
+
+    if(
+        document.activeElement.tagName === "INPUT" ||
+        document.activeElement.tagName === "TEXTAREA"
+    ) return;
+
+    if(/[0-9.+\-*/%]/.test(e.key))
+        calcInput(e.key);
+
+    if(e.key === "Enter")
+        calcEquals();
+
+    if(e.key === "Backspace")
+        calcDelete();
+
+    if(e.key === "Escape")
+        calcClear();
+});
+
+
+/* =========================
+   CONVERTER
+========================= */
+
+const conversions = {
+
+    length: {
+        units: {
+            Meter: 1,
+            Kilometer: 1000,
+            Centimeter: .01,
+            Millimeter: .001,
+            Mile: 1609.344,
+            Yard: .9144,
+            Foot: .3048,
+            Inch: .0254
+        }
+    },
+
+    weight: {
+        units: {
+            Kilogram: 1,
+            Gram: .001,
+            Milligram: .000001,
+            Pound: .45359237,
+            Ounce: .0283495
+        }
+    },
+
+    time: {
+        units: {
+            Second: 1,
+            Minute: 60,
+            Hour: 3600,
+            Day: 86400,
+            Week: 604800
+        }
+    },
+
+    data: {
+        units: {
+            Byte: 1,
+            Kilobyte: 1024,
+            Megabyte: 1024 ** 2,
+            Gigabyte: 1024 ** 3,
+            Terabyte: 1024 ** 4
+        }
+    }
+
+};
+
+function updateUnits() {
+
+    const type = document.getElementById("conversionType").value;
+
+    const from = document.getElementById("fromUnit");
+    const to = document.getElementById("toUnit");
+
+    from.innerHTML = "";
+    to.innerHTML = "";
+
+    Object.keys(conversions[type].units).forEach(unit => {
+
+        from.add(new Option(unit, unit));
+        to.add(new Option(unit, unit));
+
+    });
+
+    if(to.options.length > 1)
+        to.selectedIndex = 1;
+
+    convert();
+}
+
+function convert() {
+
+    const type = document.getElementById("conversionType").value;
+
+    const value =
+        parseFloat(document.getElementById("convertInput").value);
+
+    const from =
+        document.getElementById("fromUnit").value;
+
+    const to =
+        document.getElementById("toUnit").value;
+
+    if(!Number.isFinite(value)) return;
+
+    if(type === "temperature") {
+
+        let celsius;
+
+        if(from === "Celsius")
+            celsius = value;
+        else if(from === "Fahrenheit")
+            celsius = (value - 32) * 5 / 9;
+        else
+            celsius = value - 273.15;
+
+        let result;
+
+        if(to === "Celsius")
+            result = celsius;
+        else if(to === "Fahrenheit")
+            result = celsius * 9 / 5 + 32;
+        else
+            result = celsius + 273.15;
+
+        showConversion(result, to);
+        return;
+    }
+
+    const base =
+        value * conversions[type].units[from];
+
+    const result =
+        base / conversions[type].units[to];
+
+    showConversion(result, to);
+}
+
+function showConversion(result, unit) {
+
+    let rounded =
+        Math.abs(result) >= 100000
+        ? result.toExponential(5)
+        : Number(result.toFixed(8)).toLocaleString();
+
+    document.getElementById("convertResult").textContent =
+        rounded + " " + unit;
+
+    document.getElementById("convertExplanation").textContent =
+        "Converted value";
+}
+
+conversions.temperature = {
+    units: {
+        Celsius: 1,
+        Fahrenheit: 1,
+        Kelvin: 1
+    }
+};
+
+updateUnits();
+
+
+/* =========================
+   STOPWATCH
+========================= */
+
+let stopwatchRunning = false;
+let stopwatchStartTime = 0;
+let stopwatchElapsed = 0;
+let stopwatchInterval = null;
+let lapNumber = 0;
+
+function formatStopwatch(ms) {
+
+    let minutes = Math.floor(ms / 60000);
+    let seconds = Math.floor((ms % 60000) / 1000);
+    let hundredths = Math.floor((ms % 1000) / 10);
+
+    return String(minutes).padStart(2,"0") + ":" +
+           String(seconds).padStart(2,"0") + "." +
+           String(hundredths).padStart(2,"0");
+}
+
+function updateStopwatch() {
+
+    const current =
+        stopwatchRunning
+        ? Date.now() - stopwatchStartTime + stopwatchElapsed
+        : stopwatchElapsed;
+
+    document.getElementById("stopwatchDisplay").textContent =
+        formatStopwatch(current);
+}
+
+function toggleStopwatch() {
+
+    const button =
+        document.getElementById("stopwatchStart");
+
+    if(!stopwatchRunning) {
+
+        stopwatchStartTime = Date.now();
+        stopwatchRunning = true;
+
+        stopwatchInterval =
+            setInterval(updateStopwatch, 10);
+
+        button.textContent = "Pause";
+
+    } else {
+
+        stopwatchElapsed += Date.now() - stopwatchStartTime;
+
+        stopwatchRunning = false;
+
+        clearInterval(stopwatchInterval);
+
+        button.textContent = "Start";
+    }
+}
+
+function lapStopwatch() {
+
+    const current =
+        stopwatchRunning
+        ? Date.now() - stopwatchStartTime + stopwatchElapsed
+        : stopwatchElapsed;
+
+    if(current <= 0) return;
+
+    lapNumber++;
+
+    const lap = document.createElement("div");
+
+    lap.className = "lap";
+
+    lap.innerHTML =
+        `<span>Lap ${lapNumber}</span>
+         <strong>${formatStopwatch(current)}</strong>`;
+
+    document.getElementById("laps")
+        .prepend(lap);
+}
+
+function resetStopwatch() {
+
+    clearInterval(stopwatchInterval);
+
+    stopwatchRunning = false;
+    stopwatchElapsed = 0;
+    lapNumber = 0;
+
+    document.getElementById("stopwatchDisplay")
+        .textContent = "00:00.00";
+
+    document.getElementById("stopwatchStart")
+        .textContent = "Start";
+
+    document.getElementById("laps").innerHTML = "";
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+let timerTotal = 300;
+let timerRemaining = 300;
+let timerRunning = false;
+let timerInterval = null;
+
+function formatTimer(seconds) {
+
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+
+    if(h > 0) {
+
+        return String(h).padStart(2,"0") + ":" +
+               String(m).padStart(2,"0") + ":" +
+               String(s).padStart(2,"0");
+
+    }
+
+    return String(m).padStart(2,"0") + ":" +
+           String(s).padStart(2,"0");
+}
+
+function updateTimerDisplay() {
+
+    document.getElementById("timerDisplay").textContent =
+        formatTimer(timerRemaining);
+
+    const progress =
+        timerTotal > 0
+        ? ((timerTotal - timerRemaining) / timerTotal) * 100
+        : 0;
+
+    document.getElementById("timerCircle")
+        .style.setProperty("--progress", progress + "%");
+}
+
+function setTimer() {
+
+    if(timerRunning) return;
+
+    const h =
+        Math.max(0, parseInt(
+            document.getElementById("timerHours").value
+        ) || 0);
+
+    const m =
+        Math.max(0, parseInt(
+            document.getElementById("timerMinutes").value
+        ) || 0);
+
+    const s =
+        Math.max(0, parseInt(
+            document.getElementById("timerSeconds").value
+        ) || 0);
+
+    timerTotal = h * 3600 + m * 60 + s;
+
+    if(timerTotal <= 0) {
+
+        toast("Set a time first");
+        return;
+    }
+
+    timerRemaining = timerTotal;
+
+    updateTimerDisplay();
+    toast("Timer updated");
+}
+
+function toggleTimer() {
+
+    if(timerRemaining <= 0) {
+        timerRemaining = timerTotal;
+    }
+
+    if(!timerTotal) {
+        toast("Set a time first");
+        return;
+    }
+
+    if(!timerRunning) {
+
+        timerRunning = true;
+
+        document.getElementById("timerButton")
+            .textContent = "Pause";
+
+        timerInterval = setInterval(() => {
+
+            timerRemaining--;
+
+            updateTimerDisplay();
+
+            if(timerRemaining <= 0) {
+
+                clearInterval(timerInterval);
+
+                timerRunning = false;
+
+                document.getElementById("timerButton")
+                    .textContent = "Start";
+
+                toast("Timer finished");
+
+                if(navigator.vibrate)
+                    navigator.vibrate([300,100,300]);
+            }
+
+        }, 1000);
+
+    } else {
+
+        clearInterval(timerInterval);
+
+        timerRunning = false;
+
+        document.getElementById("timerButton")
+            .textContent = "Start";
+    }
+}
+
+function resetTimer() {
+
+    clearInterval(timerInterval);
+
+    timerRunning = false;
+    timerRemaining = timerTotal;
+
+    document.getElementById("timerButton")
+        .textContent = "Start";
+
+    updateTimerDisplay();
+}
+
+updateTimerDisplay();
+
+
+/* =========================
+   NOTES
+========================= */
+
+const notesArea = document.getElementById("notesArea");
+
+notesArea.value =
+    localStorage.getItem("utility_notes") || "";
+
+function updateNoteStats() {
+
+    const text = notesArea.value.trim();
+
+    const words =
+        text ? text.split(/\s+/).length : 0;
+
+    document.getElementById("wordCount").textContent =
+        words + (words === 1 ? " word" : " words");
+}
+
+notesArea.addEventListener("input", () => {
+
+    localStorage.setItem(
+        "utility_notes",
+        notesArea.value
+    );
+
+    document.getElementById("noteStatus")
+        .textContent = "Saved just now";
+
+    updateNoteStats();
+});
+
+updateNoteStats();
+
+
+/* =========================
+   TEXT TOOLS
+========================= */
+
+function transformText(type) {
+
+    const area = document.getElementById("textInput");
+
+    let text = area.value;
+
+    if(type === "upper")
+        text = text.toUpperCase();
+
+    if(type === "lower")
+        text = text.toLowerCase();
+
+    if(type === "reverse")
+        text = [...text].reverse().join("");
+
+    if(type === "title") {
+
+        text = text
+            .toLowerCase()
+            .replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    area.value = text;
+
+    countText();
+}
+
+function countText() {
+
+    const text =
+        document.getElementById("textInput").value;
+
+    const characters = text.length;
+
+    const charactersNoSpaces =
+        text.replace(/\s/g, "").length;
+
+    const words =
+        text.trim()
+        ? text.trim().split(/\s+/).length
+        : 0;
+
+    const lines =
+        text
+        ? text.split(/\r?\n/).length
+        : 0;
+
+    document.getElementById("textStats").textContent =
+        `Words: ${words}
+Characters: ${characters}
+Characters without spaces: ${charactersNoSpaces}
+Lines: ${lines}`;
+}
+
+async function copyText() {
+
+    const text =
+        document.getElementById("textInput").value;
+
+    if(!text) {
+
+        toast("Nothing to copy");
+        return;
+    }
+
+    try {
+
+        await navigator.clipboard.writeText(text);
+
+        toast("Copied to clipboard");
+
+    } catch {
+
+        toast("Clipboard unavailable");
+    }
+}
+
+function clearText() {
+
+    document.getElementById("textInput").value = "";
+
+    document.getElementById("textStats").textContent =
+        "Character count and word count will appear here.";
+
+    toast("Cleared");
+}
+
+
+/* =========================
+   INITIAL SETUP
+========================= */
+
+document.getElementById("timerMinutes")
+    .addEventListener("input", () => {
+        if(!timerRunning) setTimer();
+    });
+
+</script>
+
+</body>
+</html>
