@@ -802,7 +802,6 @@ label {
 </section>
 
 
-<!-- TIMER -->
 
 <section id="timer" class="page">
 
@@ -858,7 +857,7 @@ label {
 </section>
 
 
-<!-- NOTES -->
+
 
 <section id="notes" class="page">
 
@@ -885,7 +884,7 @@ label {
 </section>
 
 
-<!-- TEXT TOOLS -->
+
 
 <section id="clipboard" class="page">
 
@@ -940,9 +939,7 @@ label {
 
 <script>
 
-/* =========================
-   NAVIGATION
-========================= */
+
 
 function showPage(id, button) {
 
@@ -974,9 +971,7 @@ function go(id) {
 }
 
 
-/* =========================
-   CLOCK
-========================= */
+
 
 function updateClock() {
 
@@ -994,9 +989,7 @@ setInterval(updateClock, 1000);
 updateClock();
 
 
-/* =========================
-   TOAST
-========================= */
+
 
 let toastTimeout;
 
@@ -1015,9 +1008,7 @@ function toast(message) {
 }
 
 
-/* =========================
-   CALCULATOR
-========================= */
+
 
 let calcValue = "";
 
@@ -1104,9 +1095,7 @@ document.addEventListener("keydown", e => {
 });
 
 
-/* =========================
-   CONVERTER
-========================= */
+
 
 const conversions = {
 
@@ -1251,9 +1240,7 @@ conversions.temperature = {
 updateUnits();
 
 
-/* =========================
-   STOPWATCH
-========================= */
+
 
 let stopwatchRunning = false;
 let stopwatchStartTime = 0;
